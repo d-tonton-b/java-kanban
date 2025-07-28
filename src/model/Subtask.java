@@ -40,6 +40,7 @@ public class Subtask extends Task {
         Task task = (Task) o;
         return id == task.id;
     }
+    
     @Override
     public int hashCode() {
         return super.hashCode();
