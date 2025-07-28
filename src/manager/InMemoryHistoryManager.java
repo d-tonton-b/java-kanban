@@ -13,14 +13,14 @@ public class InMemoryHistoryManager implements  HistoryManager {
 
 
     @Override
-    public List<Task> getHistory(){
+    public List<Task> getHistory() {
 
         return historyList.getTasks();
 
     }
 
     @Override
-    public void remove(int id){
+    public void remove(int id) {
 
         HistoryLinkedList.Node node = nodeMap.remove(id);
 
@@ -30,7 +30,7 @@ public class InMemoryHistoryManager implements  HistoryManager {
     }
 
     @Override
-    public void add(Task task){
+    public void add(Task task) {
 
         if(task != null) {
             remove(task.getID());
