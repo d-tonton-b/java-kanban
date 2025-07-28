@@ -2,18 +2,17 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-public class Epic extends Task{
+public class Epic extends Task {
 
-    private List<Integer> subtasksID = new ArrayList<>();
+    private final List<Integer> subtasksID = new ArrayList<>();
 
     public Epic(int id, String name, String description) {
         super(id, name, description, Status.NEW);
     }
 
-    public void addSubtaskID(int subtaskID){
-        if(subtaskID == id){
+    public void addSubtaskID(int subtaskID) {
+        if (subtaskID == id) {
             System.out.println("Эпик не может стать своей собственной подзадачей");
             return;
         } else {
@@ -21,22 +20,22 @@ public class Epic extends Task{
         }
     }
 
-    public List<Integer> getSubtasksID (){
+    public List<Integer> getSubtasksID() {
         return subtasksID;
     }
 
-    public void removeSubtask(int id){
+    public void removeSubtask(int id) {
         subtasksID.remove(Integer.valueOf(id));
 
     }
 
-    public void clearAllSubtasksID(){
+    public void clearAllSubtasksID() {
         subtasksID.clear();
 
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "Epic {" +
                 "id = " + id +
                 ", status = " + status +
@@ -46,14 +45,15 @@ public class Epic extends Task{
     }
 
     @Override
-    public boolean equals(Object o){
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Task)) return false;
         Task task = (Task) o;
         return id == task.id;
     }
+
     @Override
-    public int hashCode(){
+    public int hashCode() {
         return super.hashCode();
     }
 }
