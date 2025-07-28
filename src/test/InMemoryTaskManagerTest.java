@@ -104,4 +104,50 @@ class InMemoryTaskManagerTest {
         assertNotEquals("Epic", changedTask.getName(), "Менеджер должен возвращать копии, а не оригиналы задач");
     }
 
+    @Test
+    void shouldRemoveSubtaskReferencesAfterDeletion() {
+        Epic epic = new Epic(1, "epic1", "test epic1");
+        manager.makeEpic(epic);
+
+        Subtask subtask = new Subtask(1, "desc", "test sub", Status.NEW, epic.getID());
+        manager.makeSubtask(subtask);
+
+        assertFalse(manager.getEpic(epic.getID()).getSubtasksID().isEmpty());
+
+        manager.removeSubtask(subtask.getID());
+
+        assertTrue(manager.getEpic(epic.getID()).getSubtasksID().isEmpty(), "Epic должен очищать id удалённой подзадачи");
+    }
+
+    @Test
+    void shouldNotContainInvalidSubtaskIdsInEpic() {
+        Epic epic = new Epic(1, "epic1", "test epic1");
+        manager.makeEpic(epic);
+
+        Subtask subtask = new Subtask(1, "desc", "test sub", Status.NEW, epic.getID());
+        manager.makeSubtask(subtask);
+
+        manager.clearAllSubtasks();
+
+        epic.getSubtasksID().add(999);
+
+        for (Integer id : epic.getSubtasksID()) {
+            assertNull(manager.getSubtask(id), "Менеджер не должен хранить невалидные id подзадач в эпике");
+        }
+    }
+
+    @Test
+    void shouldNotAffectManagerDataWhenTaskIsMutatedExternally() {
+        Task task = new Task(1, "task1", "test task1", Status.NEW);
+        manager.makeTask(task);
+
+        Task storedTask = manager.getTask(task.getID());
+
+        storedTask.setName("Epic");
+
+        Task changedTask = manager.getTask(task.getID());
+
+        assertNotEquals("Epic", changedTask.getName(), "Менеджер должен возвращать копии, а не оригиналы задач");
+    }
+
 }
