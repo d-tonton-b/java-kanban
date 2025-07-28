@@ -69,10 +69,13 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public Subtask getSubtask(int id) {
-        Subtask subtaskOG = subtasks.get(id);
-        Subtask newSubtask = new Subtask(subtaskOG.getID(), subtaskOG.getName(), subtaskOG.getDescription(), subtaskOG.getStatus(), subtaskOG.getEpicID());
-        historyManager.add(newSubtask);
-        return newSubtask;
+        if (subtasks.containsKey(id)) {
+            Subtask subtaskOG = subtasks.get(id);
+            Subtask newSubtask = new Subtask(subtaskOG.getID(), subtaskOG.getName(), subtaskOG.getDescription(), subtaskOG.getStatus(), subtaskOG.getEpicID());
+            historyManager.add(newSubtask);
+            return newSubtask;
+        }
+        return null;
     }
 
     @Override

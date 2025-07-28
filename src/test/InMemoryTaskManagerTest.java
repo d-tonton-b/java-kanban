@@ -68,14 +68,14 @@ class InMemoryTaskManagerTest {
         Epic epic = new Epic(1, "epic1", "test epic1");
         manager.makeEpic(epic);
 
-        Subtask subtask = new Subtask(1, "desc", "test sub", Status.NEW, epic.getID());
+        Subtask subtask = new Subtask(2, "desc", "test sub", Status.NEW, epic.getID());
         manager.makeSubtask(subtask);
 
-        assertFalse(manager.getEpic(epic.getID()).getSubtasksID().isEmpty());
+        assertFalse(epic.getSubtasksID().isEmpty());
 
         manager.removeSubtask(subtask.getID());
 
-        assertTrue(manager.getEpic(epic.getID()).getSubtasksID().isEmpty(), "Epic должен очищать id удалённой подзадачи");
+        assertTrue(epic.getSubtasksID().isEmpty(), "Epic должен очищать id удалённой подзадачи");
     }
 
     @Test
