@@ -1,34 +1,36 @@
-
 import manager.Managers;
-import model.*;
 import manager.TaskManager;
+import model.Epic;
+import model.Status;
+import model.Subtask;
+import model.Task;
 
 public class Main {
     public static void main(String[] args) {
         TaskManager manager = Managers.getDefault();
 
         //можно ставить любой айди, так как далее таск менеджер поменяет на нужный
-        Task userTask1 = new Task(0, "Моя первая задача","Ну, я ее сделал", Status.NEW);
-        Task userTask2 = new Task(0, "Моя вторя задача","Ну, я ее тоже сделал", Status.NEW);
+        Task userTask1 = new Task(0, "Моя первая задача", "Ну, я ее сделал", Status.NEW);
+        Task userTask2 = new Task(0, "Моя вторя задача", "Ну, я ее тоже сделал", Status.NEW);
 
         manager.makeTask(userTask1);
         manager.makeTask(userTask2);
 
-        Epic userEpic1 = new Epic(0,"Мой первый эпик", "Сделать 2 подзачи");
+        Epic userEpic1 = new Epic(0, "Мой первый эпик", "Сделать 2 подзачи");
 
         manager.makeEpic(userEpic1);
 
-        Subtask userSubtask1 = new Subtask(0,"Моя первая подзача", "Добавить к первому эпику", Status.NEW, userEpic1.getID());
-        Subtask userSubtask2 = new Subtask(0,"Моя вторая подзача", "Добавить к первому эпику", Status.NEW, userEpic1.getID());
+        Subtask userSubtask1 = new Subtask(0, "Моя первая подзача", "Добавить к первому эпику", Status.NEW, userEpic1.getID());
+        Subtask userSubtask2 = new Subtask(0, "Моя вторая подзача", "Добавить к первому эпику", Status.NEW, userEpic1.getID());
 
         manager.makeSubtask(userSubtask1);
         manager.makeSubtask(userSubtask2);
 
-        Epic userEpic2 = new Epic(0,"Мой второй эпик", "Сделать 1 подзачу");
+        Epic userEpic2 = new Epic(0, "Мой второй эпик", "Сделать 1 подзачу");
 
         manager.makeEpic(userEpic2);
 
-        Subtask userSubtask3 = new Subtask(0,"Моя третья подзача", "Добавить ко второму эпику", Status.NEW, userEpic2.getID());
+        Subtask userSubtask3 = new Subtask(0, "Моя третья подзача", "Добавить ко второму эпику", Status.NEW, userEpic2.getID());
 
         manager.makeSubtask(userSubtask3);
 
@@ -57,7 +59,7 @@ public class Main {
         System.out.println(manager.getAllSubtasks());
         System.out.println();
 
-        Epic epic1 = new Epic(userEpic1.getID(), "Обновленный эпик","Обновить первый эпик");
+        Epic epic1 = new Epic(userEpic1.getID(), "Обновленный эпик", "Обновить первый эпик");
         manager.updateEpic(epic1);
 
         Subtask subtask1 = new Subtask(userSubtask2.getID(), "Обновленная подзадача", "Обновить подзадачу", Status.DONE, userSubtask2.getEpicID());
