@@ -1,14 +1,9 @@
 package test;
 
-import manager.Managers;
-import manager.TaskManager;
-import model.Epic;
-import model.Status;
-import model.Subtask;
-import model.Task;
+import model.*;
+import manager.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -17,14 +12,14 @@ class InMemoryTaskManagerTest {
     static TaskManager manager = Managers.getDefault();
 
     @AfterEach
-    public void clearAll() {
+    public void clearAll(){
         manager.clearAllEpics();
         manager.clearAllTasks();
         manager.clearAllSubtasks();
     }
 
     @Test
-    public void shouldCreateDifferentTaskTypes() {
+    public void shouldCreateDifferentTaskTypes(){
         Task task1 = new Task(1, "task1", "test task1", Status.NEW);
         manager.makeTask(task1);
 
@@ -41,7 +36,7 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-    public void shouldBeNoConflictBetweenTasksWithTheSameID() {
+    public void shouldBeNoConflictBetweenTasksWithTheSameID(){
         Task task1 = new Task(1, "task1", "test task1", Status.NEW);
         manager.makeTask(task1);
 
@@ -52,7 +47,7 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-    public void shouldBeTheSameInManager() {
+    public void shouldBeTheSameInManager(){
         Task task1 = new Task(2, "task1", "test task1", Status.NEW);
         Task inManager = manager.makeTask(task1);
 
@@ -60,6 +55,7 @@ class InMemoryTaskManagerTest {
         assertEquals(inManager.getName(), task1.getName(), "Разное Название");
         assertEquals(inManager.getStatus(), task1.getStatus(), "Разный статус");
         assertEquals(inManager.getID(), task1.getID(), "Разный АйДи");
+
 
     }
 
