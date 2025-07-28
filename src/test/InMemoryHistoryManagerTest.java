@@ -5,6 +5,7 @@ import manager.Managers;
 import model.Status;
 import model.Task;
 import org.junit.jupiter.api.Test;
+
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,8 +15,8 @@ class InMemoryHistoryManagerTest {
     HistoryManager manager = Managers.getDefaultHistory();
 
     @Test
-    public  void shouldSaveTasksWithoutChanges() {
-        Task task1 = new Task(1,"task1", "test task1", Status.NEW);
+    public void shouldSaveTasksWithoutChanges() {
+        Task task1 = new Task(1, "task1", "test task1", Status.NEW);
 
         manager.add(task1);
 

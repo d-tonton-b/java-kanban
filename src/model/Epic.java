@@ -5,14 +5,14 @@ import java.util.List;
 
 public class Epic extends Task {
 
-    private List<Integer> subtasksID = new ArrayList<>();
+    private final List<Integer> subtasksID = new ArrayList<>();
 
     public Epic(int id, String name, String description) {
         super(id, name, description, Status.NEW);
     }
 
-    public void addSubtaskID(int subtaskID){
-        if(subtaskID == id) {
+    public void addSubtaskID(int subtaskID) {
+        if (subtaskID == id) {
             System.out.println("Эпик не может стать своей собственной подзадачей");
             return;
         } else {
@@ -20,7 +20,7 @@ public class Epic extends Task {
         }
     }
 
-    public List<Integer> getSubtasksID () {
+    public List<Integer> getSubtasksID() {
         return subtasksID;
     }
 
@@ -51,6 +51,7 @@ public class Epic extends Task {
         Task task = (Task) o;
         return id == task.id;
     }
+
     @Override
     public int hashCode() {
         return super.hashCode();

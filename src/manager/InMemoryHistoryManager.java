@@ -1,11 +1,11 @@
 package manager;
 
-import java.util.List;
+import model.Task;
+
 import java.util.HashMap;
+import java.util.List;
 
-import model.*;
-
-public class InMemoryHistoryManager implements  HistoryManager {
+public class InMemoryHistoryManager implements HistoryManager {
 
 
     private final HistoryLinkedList historyList = new HistoryLinkedList();
@@ -32,7 +32,7 @@ public class InMemoryHistoryManager implements  HistoryManager {
     @Override
     public void add(Task task) {
 
-        if(task != null) {
+        if (task != null) {
             remove(task.getID());
             HistoryLinkedList.Node newNode = historyList.linkLast(task);
             nodeMap.put(task.getID(), newNode);
