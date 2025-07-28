@@ -14,7 +14,7 @@ public class Subtask extends Task {
     }
 
     public void setEpicID(int epicID) {
-        if(epicID == id){
+        if (epicID == id) {
             System.out.println("Подазадача не может быть собственным эпиком");
             return;
         } else {
@@ -32,13 +32,15 @@ public class Subtask extends Task {
                 ", description = " + description +
                 "}";
     }
+    
     @Override
-    public boolean equals(Object o) {
+    public boolean equals (Object o) {
         if (this == o) return true;
         if (!(o instanceof Task)) return false;
         Task task = (Task) o;
         return id == task.id;
     }
+
     @Override
     public int hashCode() {
         return super.hashCode();
