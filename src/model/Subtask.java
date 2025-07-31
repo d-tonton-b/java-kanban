@@ -39,6 +39,7 @@ public class Subtask extends Task {
         if (!(o instanceof Task)) return false;
         Task task = (Task) o;
         return id == task.id;
+
     }
 
     @Override
