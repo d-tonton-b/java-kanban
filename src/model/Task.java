@@ -8,13 +8,14 @@ public class Task {
     protected String description;
     protected int id;
     protected Status status;
+    protected TaskType type;
 
     public Task(int id, String name, String description, Status status) {
         this.name = name;
         this.description = description;
         this.status = status;
         this.id = id;
-
+        this.type = TaskType.TASK;
     }
 
     public String getDescription() {
@@ -31,6 +32,10 @@ public class Task {
 
     public Integer getID() {
         return id;
+    }
+
+    public TaskType getType() {
+        return type;
     }
 
     public void setDescription(String description) {
