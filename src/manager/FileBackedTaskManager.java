@@ -38,15 +38,15 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
 
             writer.write("id,type,name,status,description,epic\n");
             for (Task task : getAllTasks()) {
-                writer.write(toString(task));
+                writer.write(taskToCSV(task));
                 writer.newLine();
             }
             for (Epic epic : getAllEpics()) {
-                writer.write(toString(epic));
+                writer.write(taskToCSV(epic));
                 writer.newLine();
             }
             for (Subtask subtask : getAllSubtasks()) {
-                writer.write(toString(subtask));
+                writer.write(taskToCSV(subtask));
                 writer.newLine();
             }
 
@@ -60,17 +60,18 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         FileBackedTaskManager manager = new FileBackedTaskManager(file);
         try {
             List<String> lines = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
-            for (int i = 1; i < lines.size(); i++) { // пропускаем заголовок
+            for (int i = 1; i < lines.size(); i++) {
                 Task task = fromString(lines.get(i));
+                int id = task.getID();
                 switch (task.getType()) {
                     case TASK:
-                        manager.makeTask(task);
+                        manager.tasks.put(id, task);
                         break;
                     case EPIC:
-                        manager.makeEpic((Epic) task);
+                        manager.epics.put(id, (Epic) task);
                         break;
                     case SUBTASK:
-                        manager.makeSubtask((Subtask) task);
+                        manager.subtasks.put(id, (Subtask) task);
                         break;
                 }
             }
@@ -80,7 +81,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         return manager;
     }
 
-    private static String toString(Task task) {
+    private static String taskToCSV(Task task) {
         StringBuilder sb = new StringBuilder();
         sb.append(task.getID()).append(",");
         sb.append(task.getType()).append(",");

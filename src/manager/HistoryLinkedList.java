@@ -89,7 +89,6 @@ public class HistoryLinkedList<T> {
     public void printList() {
         Node<T> current = head;
         while (current != null) {
-            System.out.println(current.data);
             current = current.next;
         }
     }
