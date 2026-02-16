@@ -1,4 +1,4 @@
-import manager.Managers;
+import manager.InMemoryTaskManager;
 import manager.TaskManager;
 import model.Epic;
 import model.Status;
@@ -7,7 +7,7 @@ import model.Task;
 
 public class Main {
     public static void main(String[] args) {
-        TaskManager manager = Managers.getDefault();
+        TaskManager manager = new InMemoryTaskManager();
 
         //можно ставить любой айди, так как далее таск менеджер поменяет на нужный
         Task userTask1 = new Task(0, "Моя первая задача", "Ну, я ее сделал", Status.NEW);

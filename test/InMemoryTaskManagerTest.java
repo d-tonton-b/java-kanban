@@ -1,6 +1,6 @@
 package test;
 
-import manager.Managers;
+import manager.InMemoryTaskManager;
 import manager.TaskManager;
 import model.Epic;
 import model.Status;
@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class InMemoryTaskManagerTest {
 
-    static TaskManager manager = Managers.getDefault();
+    static TaskManager manager = new InMemoryTaskManager();
 
     @AfterEach
     public void clearAll() {
@@ -54,7 +54,8 @@ class InMemoryTaskManagerTest {
     @Test
     public void shouldBeTheSameInManager() {
         Task task1 = new Task(2, "task1", "test task1", Status.NEW);
-        Task inManager = manager.makeTask(task1);
+        manager.makeTask(task1);
+        Task inManager = manager.getTask(task1.getID());
 
         assertEquals(inManager.getDescription(), task1.getDescription(), "Разное Описание");
         assertEquals(inManager.getName(), task1.getName(), "Разное Название");
