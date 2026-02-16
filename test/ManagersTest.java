@@ -5,13 +5,16 @@ import manager.Managers;
 import manager.TaskManager;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class ManagersTest {
 
     @Test
     public void shouldReturnInitialisedTasKManager() {
-        TaskManager manager = Managers.getDefault();
+        File file = new File("test.csv");
+        TaskManager manager = Managers.getDefault(file);
         assertNotNull(manager, "Менеджер задач должен быть проинициализирован");
     }
 

@@ -1,6 +1,7 @@
 package test;
 
 import manager.FileBackedTaskManager;
+import manager.InMemoryTaskManager;
 import model.Epic;
 import model.Status;
 import model.Subtask;
@@ -52,16 +53,20 @@ class FileBackedTaskManagerTest {
     @Test
     void saveAndLoadEpicWithSubtasks() {
         FileBackedTaskManager manager = new FileBackedTaskManager(tempFile);
+        InMemoryTaskManager taskManager = new InMemoryTaskManager();
 
         Epic epic = new Epic(1, "Epic1", "Epic description");
         manager.makeEpic(epic);
         int epicId = epic.getID();
+        System.out.println(epicId);
 
         Subtask sub1 = new Subtask(1, "Subtask1", "desc", Status.NEW, epicId);
         Subtask sub2 = new Subtask(1, "Subtask2", "desc", Status.DONE, epicId);
 
         manager.makeSubtask(sub1);
         manager.makeSubtask(sub2);
+
+        manager.save();
 
         FileBackedTaskManager loaded = FileBackedTaskManager.loadFromFile(tempFile);
 

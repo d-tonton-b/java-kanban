@@ -1,6 +1,6 @@
 package test;
 
-import manager.Managers;
+import manager.InMemoryTaskManager;
 import manager.TaskManager;
 import model.Epic;
 import model.Status;
@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class InMemoryTaskManagerTest {
 
-    static TaskManager manager = Managers.getDefault();
+    static TaskManager manager = new InMemoryTaskManager();
 
     @AfterEach
     public void clearAll() {
